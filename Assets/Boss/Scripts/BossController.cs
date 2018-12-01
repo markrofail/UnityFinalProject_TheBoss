@@ -8,6 +8,7 @@ public class BossController : MonoBehaviour
 {
     private Animator anim;
     private ParticleSystem vfx_FireParticleSystem;
+    private ParticleSystem vfx_GroundParticleSystem;
     private BossSoundManager SOUND_MANAGER;
 
     // Character Constants
@@ -25,6 +26,7 @@ public class BossController : MonoBehaviour
     private int anim_HeavyAttack = 0;
     private bool isBusy = false;
     private bool isBreathingFire = false;
+    private bool isBreakingGround = false;
 
     // Ground Parameters
     private Vector3 ground_Normal;
@@ -36,7 +38,9 @@ public class BossController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        vfx_FireParticleSystem = transform.GetComponentInChildren<ParticleSystem>();
+        ParticleSystem[] particleSystems = transform.GetComponentsInChildren<ParticleSystem>();
+        vfx_FireParticleSystem = particleSystems[0];
+        vfx_GroundParticleSystem = particleSystems[1];
         SOUND_MANAGER = GetComponentInChildren<BossSoundManager>();
         anim = GetComponent<Animator>();
         StartCoroutine(PerformAttack());
@@ -196,6 +200,19 @@ public class BossController : MonoBehaviour
         else
         {
             vfx_FireParticleSystem.Stop();
+        }
+    }
+
+    public void BreakGround()
+    {
+        isBreakingGround ^= true;
+        if (isBreakingGround)
+        {
+            vfx_GroundParticleSystem.Play();
+        }
+        else
+        {
+            vfx_GroundParticleSystem.Stop();
         }
     }
 

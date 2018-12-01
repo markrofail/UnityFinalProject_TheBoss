@@ -7,6 +7,7 @@ using Boss.Utilities;
 public class BossController : MonoBehaviour
 {
     private Animator anim;
+    private ParticleSystem vfx_FireParticleSystem;
 
     // Character Constants
     public float const_AnimSpeedMultiplier = 1f;
@@ -22,7 +23,7 @@ public class BossController : MonoBehaviour
     private int anim_LightAttack = 0;
     private int anim_HeavyAttack = 0;
     private bool isBusy = false;
-
+    private bool isBreathingFire = false;
 
     // Ground Parameters
     private Vector3 ground_Normal;
@@ -34,6 +35,7 @@ public class BossController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        vfx_FireParticleSystem = transform.GetComponentInChildren<ParticleSystem>();
         anim = GetComponent<Animator>();
         StartCoroutine(PerformAttack());
     }
@@ -60,7 +62,6 @@ public class BossController : MonoBehaviour
             anim_MovementForward = move.z;
 
             ApplyExtraTurnRotation(rotation);
-
         }
 
         // send input and other state parameters to the animator
@@ -163,13 +164,26 @@ public class BossController : MonoBehaviour
         // }
     }
 
-    public void RotateHead(Vector3 move)
-    {
-        Transform head = transform.Find("Head");
-        float headRotation = 1f;
-        head.Translate(new Vector3(headRotation, 0, 0));
+    // public void RotateHead(Vector3 move)
+    // {
+    //     Transform head = transform.Find("Head");
+    //     float headRotation = 1f;
+    //     head.Translate(new Vector3(headRotation, 0, 0));
 
-        // head.Rotate(new Vector3(headRotation, 0, 0));
+    //     // head.Rotate(new Vector3(headRotation, 0, 0));
+    // }
+
+    public void BreathFire()
+    {
+        isBreathingFire ^= true;
+        if (isBreathingFire)
+        {
+            vfx_FireParticleSystem.Play();
+        }
+        else
+        {
+            vfx_FireParticleSystem.Stop();
+        }
     }
 
     public bool getIsBusy()

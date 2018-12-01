@@ -95,12 +95,11 @@ public class BossController : MonoBehaviour
     void UpdateAnimator(Vector3 move)
     {
         // update the animator parameters
-        anim.SetFloat("HasteValue", anim_MovementForward, 0.1f, Time.deltaTime);
-        anim.SetFloat("RotValue", anim_MovementRotate, 0.1f, Time.deltaTime);
-        // Debug.Log(anim_MovementRotate);
         anim.SetBool("CloseEnough", anim_FinishedMoving);
         anim.SetInteger("LightAttack", anim_LightAttack);
         anim.SetInteger("HeavyAttack", anim_HeavyAttack);
+        anim.SetFloat("HasteValue", anim_MovementForward, 0.1f, Time.deltaTime);
+        anim.SetFloat("RotValue", anim_MovementRotate, 0.1f, Time.deltaTime);
 
         // the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector,
         // which affects the movement speed because of the root motion.
@@ -110,31 +109,31 @@ public class BossController : MonoBehaviour
         }
     }
 
-    private Vector3 prevOrientation;
+    // private Vector3 prevOrientation;
     // private Quaternion prevOrientation;
     void ApplyExtraTurnRotation(Vector3 rotation)
     {
-        Vector3 currentOrientation = rotation;
-        // Quaternion currentOrientation = move;
-        bool isIdle = anim.GetCurrentAnimatorStateInfo(0).IsName("Idle");
-        if (isIdle && prevOrientation != currentOrientation)
-        {
-            // Vector3 oldAngles = prevOrientation.eulerAngles;
-            // Vector3 newAngles = currentOrientation.eulerAngles;
+        // Vector3 currentOrientation = rotation;
+        // // Quaternion currentOrientation = move;
+        // bool isIdle = anim.GetCurrentAnimatorStateInfo(0).IsName("Idle");
+        // if (isIdle && prevOrientation != currentOrientation)
+        // {
+        //     // Vector3 oldAngles = prevOrientation.eulerAngles;
+        //     // Vector3 newAngles = currentOrientation.eulerAngles;
 
-            Vector3 oldAngles = prevOrientation;
-            Vector3 newAngles = currentOrientation;
-            Debug.Log(oldAngles.z - newAngles.z);
-            if(oldAngles.z > newAngles.z)
-            {
-                anim_MovementRotate = 1f;
-            }
-            else if(oldAngles.z < newAngles.z)
-            {
-                anim_MovementRotate = -1f;
-            }
-        }
-        prevOrientation = currentOrientation;
+        //     Vector3 oldAngles = prevOrientation;
+        //     Vector3 newAngles = currentOrientation;
+
+        //     if(oldAngles.z > newAngles.z)
+        //     {
+        //         anim_MovementRotate = 1f;
+        //     }
+        //     else if(oldAngles.z < newAngles.z)
+        //     {
+        //         anim_MovementRotate = -1f;
+        //     }
+        // }
+        // prevOrientation = currentOrientation;
 
         // help the character turn faster (this is in addition to root rotation in the animation)
         float turnSpeed = Mathf.Lerp(const_StationaryTurnSpeed, const_MovingTurnSpeed, anim_MovementRotate);

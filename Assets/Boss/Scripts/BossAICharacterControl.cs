@@ -31,18 +31,14 @@ public class BossAICharacterControl : MonoBehaviour
 
         if (agent.remainingDistance > agent.stoppingDistance)
         {
-            agent.isStopped = false;
             character.Move(agent.desiredVelocity, rotationVector, false);
         }
         else
         {
-            agent.isStopped = true;
-            Debug.Log("STOP");
             character.Move(Vector3.zero, rotationVector, true);
             transform.LookAt(target);
         }
 
-        agent.updatePosition = !(character.getIsBusy());
-
+        agent.updatePosition = (agent.remainingDistance > agent.stoppingDistance) && !(character.getIsBusy());
     }
 }

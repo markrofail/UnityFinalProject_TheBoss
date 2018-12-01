@@ -278,7 +278,6 @@ GameObject:
   - component: {fileID: 4208572930708844}
   - component: {fileID: 33840763188448100}
   - component: {fileID: 23676594341096866}
-  - component: {fileID: 114686510368060334}
   - component: {fileID: 114880285339843416}
   - component: {fileID: 199129888607073954}
   - component: {fileID: 198056976010723874}
@@ -289,7 +288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1339837429399644
 GameObject:
   m_ObjectHideFlags: 1
@@ -408,7 +407,6 @@ GameObject:
   - component: {fileID: 54223516376643874}
   - component: {fileID: 136462704008359420}
   - component: {fileID: 195527253383359768}
-  - component: {fileID: 114538297831865370}
   - component: {fileID: 114062105969958654}
   - component: {fileID: 114399706569013218}
   m_Layer: 0
@@ -2071,39 +2069,6 @@ MonoBehaviour:
   const_StationaryTurnSpeed: 180
   const_AttackEvery: 3
   const_HeavyAttackEvery: 5
-  isBusy: 0
---- !u!114 &114538297831865370
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1441893306557020}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb45c296b99651c4ea640ce894bb1959, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 360
-  m_StationaryTurnSpeed: 180
-  m_JumpPower: 12
-  m_GravityMultiplier: 2
-  m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 1
-  m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 0.1
---- !u!114 &114686510368060334
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1334246288653948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29014cd42b6d273408e0ceefd336c0b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minDuration: 15
-  maxDuration: 20
 --- !u!114 &114880285339843416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2246,9 +2211,9 @@ NavMeshAgent:
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 4
+  m_StoppingDistance: 3.7
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 0
+  m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 6
   m_BaseOffset: -0.24

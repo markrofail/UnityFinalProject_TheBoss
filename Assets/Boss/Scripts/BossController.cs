@@ -8,6 +8,7 @@ public class BossController : MonoBehaviour
 {
     private Animator anim;
     private ParticleSystem vfx_FireParticleSystem;
+    private BossSoundManager SOUND_MANAGER;
 
     // Character Constants
     public float const_AnimSpeedMultiplier = 1f;
@@ -36,6 +37,7 @@ public class BossController : MonoBehaviour
     void Start()
     {
         vfx_FireParticleSystem = transform.GetComponentInChildren<ParticleSystem>();
+        SOUND_MANAGER = GetComponentInChildren<BossSoundManager>();
         anim = GetComponent<Animator>();
         StartCoroutine(PerformAttack());
     }
@@ -46,8 +48,19 @@ public class BossController : MonoBehaviour
 
     }
 
+    private bool previousTargetState = false;
     public void Move(Vector3 move, Vector3 rotation, bool reachedTarget)
     {
+        if(!previousTargetState && reachedTarget)
+        {
+            SOUND_MANAGER.FootStepsStop();
+        }
+        if(previousTargetState && !reachedTarget)
+        {
+            SOUND_MANAGER.FootStepsPlay();
+        }
+        previousTargetState = reachedTarget;
+
         if (move.magnitude > 1f)
             move.Normalize();
         anim_FinishedMoving = reachedTarget;
